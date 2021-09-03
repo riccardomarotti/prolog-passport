@@ -17,7 +17,19 @@ follows(joe, anna).
 follows(eric, joe).
 follows(jill, joe).
 
-receives(Tweep, What) :-
-  tweets(Who, What), 
-  follows(Tweep, Who).
 
+fan(joe, anna).
+fan(eric, joe).
+
+retweets(Fan, What) :-
+  tweets(Star, What),
+  fan(Fan, Star).
+
+says(Tweep, What) :-
+  tweets(Tweep, What);
+  retweets(Tweep, What).
+
+receives(Tweep, What) :-
+  tweets(Tweep, What);
+  says(Who, What), 
+  follows(Tweep, Who).
